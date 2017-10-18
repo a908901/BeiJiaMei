@@ -1,33 +1,24 @@
 <template>
 		<div class="layui-layout layui-layout-admin">
 		    <div class="layui-header">
-		        <div class="layui-logo">贝加美后台</div>
+		        <div class="layui-logo">翠鸟快速建站</div>
 		        <!-- 头部区域（可配合layui已有的水平导航） -->
-		        <ul class="layui-nav layui-layout-left">
-		            <li class="layui-nav-item"><a href="">控制台</a></li>
-		            <li class="layui-nav-item"><a href="">商品管理</a></li>
-		            <li class="layui-nav-item"><a href="">用户</a></li>
-		            <li class="layui-nav-item">
-		                <a href="javascript:;">其它系统</a>
-		                <dl class="layui-nav-child">
-		                    <dd><a href="">邮件管理</a></dd>
-		                    <dd><a href="">消息管理</a></dd>
-		                    <dd><a href="">授权管理</a></dd>
-		                </dl>
-		            </li>
-		        </ul>
+		        <!-- <ul class="layui-nav layui-layout-left">
+		            <li class="layui-nav-item" @click="Gotolist(1)" v-bind:class='{"bg-color-red":num == 1}'>编辑</li>
+		            <li class="layui-nav-item" @click="Gotolist(2)" v-bind:class='{"bg-color-red":num == 2}'>预览</li>
+		        </ul> -->
 		        <ul class="layui-nav layui-layout-right">
 		            <li class="layui-nav-item">
-		                <a href="javascript:;">
+		                <a @click="GotoDataShow()">
 		                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
 		                    贤心
 		                </a>
-		                <dl class="layui-nav-child">
-		                    <dd><a href="">基本资料</a></dd>
-		                    <dd><a href="">安全设置</a></dd>
+		                <dl class="layui-nav-child" v-if="info.isAShow">
+		                    <dd><a>基本资料</a></dd>
+		                    <dd><a>安全设置</a></dd>
 		                </dl>
 		            </li>
-		            <li class="layui-nav-item"><a href="">退了</a></li>
+		            <li class="layui-nav-item"><a href="">退出</a></li>
 		        </ul>
 		    </div>
 
@@ -35,38 +26,179 @@
 		        <div class="layui-side-scroll">
 		            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
 		            <ul class="layui-nav layui-nav-tree"  lay-filter="test">
-		                <li class="layui-nav-item layui-nav-itemed">
-		                    <a class="" href="javascript:;">所有商品</a>
+		                <li class="layui-nav-item layui-nav-itemed" v-for="(key,index_) in test" >
+		                	<div @click="GotoAccordion(index_+1)">
+		                    	<a class="" href="javascript:;">{{key.brigade}}</a>
+		                    </div>
 		                    <dl class="layui-nav-child">
-		                        <dd><a href="javascript:;">列表一</a></dd>
-		                        <dd><a href="javascript:;">列表二</a></dd>
-		                        <dd><a href="javascript:;">列表三</a></dd>
-		                        <dd><a href="">超链接</a></dd>
+		                        <dd v-for="is in test[index_].info" v-if="type == index_+1"><a href="javascript:;">{{is.content}}</a></dd>
+		                        <!-- <dd><a href="javascript:;">列表二</a></dd> -->
 		                    </dl>
 		                </li>
-		                <li class="layui-nav-item">
-		                    <a href="javascript:;">解决方案</a>
-		                    <dl class="layui-nav-child">
-		                        <dd><a href="javascript:;">列表一</a></dd>
-		                        <dd><a href="javascript:;">列表二</a></dd>
-		                        <dd><a href="">超链接</a></dd>
-		                    </dl>
-		                </li>
-		                <li class="layui-nav-item"><a href="">云市场</a></li>
-		                <li class="layui-nav-item"><a href="">发布商品</a></li>
+		              
 		            </ul>
 		        </div>
 		    </div>
 
 		    <div class="layui-body">
 		        <!-- 内容主体区域 -->
-		        <div style="padding: 15px;">内容主体区域</div>
+		        <div class="layui-body_main dis_flex">
+		        	<div class="edit" :class="{'bg-color-23262E':edit == 1}" @click="GotoEdit(1)">编辑</div>
+		        	<div class="preview" :class="{'bg-color-23262E':edit == 2}" @click="GotoEdit(2)">预览</div>
+		        </div>
+		        <chui-footer></chui-footer>
+		        <chui-right></chui-right>
 		    </div>
 
 		    
 		</div>
 
 </template>
-<script type="text/javascript">
+<style type="text/css">
+	/*公共样式*/
+	.dis_flex{
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+	.dis_no{
+		display:none;
+	}
+	.bg-color-red{
+		background: red;
+	}
+	.bg-color-23262E{
+		background: #23262E;
+		color:#fff;
+	}
+	/*.font01{font-size: 16px;}*/
+	.font01{font-size: 0.15rem;}
+	/*单页样式*/
 	
+	.layui-nav-item>.layui-nav-child{display: block;}
+	@media(max-width:1290px) {
+		.layui-body_main{
+			width:3.5rem;
+			margin:0.15rem auto;
+		}
+	    .edit,.preview{
+			width:1.5rem;
+			height:40px;
+			line-height:40px;
+			border-radius:0.3rem;
+			border:1px solid #ddd;
+			text-align:center;
+			}
+		}
+	@media(min-width:1290px) {
+		.layui-body_main{
+			width:2.5rem;
+			margin:0.15rem auto;
+		}
+	    .edit,.preview{
+			width:1.2rem;
+			height:40px;
+			line-height:40px;
+			border-radius:0.2rem;
+			border:1px solid #ddd;
+			text-align:center;
+			}
+		}
+	
+</style>
+<script type="text/javascript">
+	import chuiFooter from '../common/footer.vue';
+	import chuiRight from '../common/chuiright.vue'
+    import { XHRPost,XHRGet } from '../../js/ajax.js';
+    export default{
+        data() {
+            return {
+                test:[
+                	{brigade:'电商',info:[{content:'母婴产品'},{content:'生活用品'}]},
+                	{brigade:'门店',info:[{content:'超市活动'},{content:'品牌活动'}]},
+                	{brigade:'医院',info:[{content:'医院官网'},{content:'药品作用'},{content:'医生简介'}]},
+                	{brigade:'学校',info:[{content:'学校官网'},{content:'学校招生'},{content:'学生就业'}]}
+                	
+                ],
+                info:{
+                	isAShow:false	
+
+                },
+                edit:'1',
+                type:'',
+                arr:[],
+                num:''
+            }
+        },
+        components: {
+        	chuiFooter
+    		},
+        computed: {
+           
+        },
+        methods: {
+            //错误提示方法
+            errorTip: function (msg) {
+                layer.open({
+                    content: msg,
+                    btn: ['确定'],
+                    yes: function () {
+                        layer.closeAll();
+                    }
+                });
+            },
+            //成功提示
+            successTip: function (msg) {
+                const _this = this;
+                layer.open({
+                    content: msg,
+                    btn: ['确定'],
+                    yes: function () {
+                        XHRGet('/api/MyCenter/logOut', {}, function () {
+                           window.location.href = '/index/login_register/login.html'
+                           })
+                        layer.closeAll();
+                    }
+                });
+            },
+            //手风琴
+           GotoAccordion:function(ret){
+           		if(this.type == ret){
+           	          //this.type = ret;
+           	          this.type = '';
+           	      }else{
+           	      		this.type = ret;
+     	      }
+            		// for(var a=0;a<this.test.length;a++){
+            		// 		this.test[a].selected = false;
+            		// }
+            		
+            		// if(this.test[ret].selected == false){
+            		// 		this.test[ret].selected = true;
+            		// 		$(".layui-nav-item>layui-nav-child").eq(ret).addClass('dis_no');
+            		// 		}else{
+            		// 			this.test[ret].selected = false;;
+            		// 		}
+            		//  alert(JSON.stringify(this.test));
+
+
+            },
+            Gotolist:function(ret){
+            	this.num = ret;
+            },
+            GotoDataShow:function(){
+            	if(this.info.isAShow == false){
+	            	this.info.isAShow = true;
+	            }else{
+	            	this.info.isAShow = false;
+	            }
+
+            },
+            GotoEdit:function(ret){
+            	this.edit = ret;
+            }
+           
+
+        }
+    }
 </script>
