@@ -7,6 +7,7 @@
 		            <li class="layui-nav-item" @click="Gotolist(1)" v-bind:class='{"bg-color-red":num == 1}'>编辑</li>
 		            <li class="layui-nav-item" @click="Gotolist(2)" v-bind:class='{"bg-color-red":num == 2}'>预览</li>
 		        </ul> -->
+		       
 		        <ul class="layui-nav layui-layout-right">
 		            <li class="layui-nav-item">
 		                <a @click="GotoDataShow()">
@@ -20,6 +21,7 @@
 		            </li>
 		            <li class="layui-nav-item"><a href="">退出</a></li>
 		        </ul>
+		         <div style="width:2rem;display:inline-block;">888</div>
 		    </div>
 
 		    <div class="layui-side layui-bg-black">
@@ -46,8 +48,11 @@
 		        	<div class="edit" :class="{'bg-color-23262E':edit == 1}" @click="GotoEdit(1)">编辑</div>
 		        	<div class="preview" :class="{'bg-color-23262E':edit == 2}" @click="GotoEdit(2)">预览</div>
 		        </div>
-		        <chui-footer></chui-footer>
-		        <chui-right></chui-right>
+		        <div class="dis_flex">
+		        	<chui-footer></chui-footer>
+		        	<chui-right></chui-right>	
+		        </div>
+		        
 		    </div>
 
 		    
@@ -108,7 +113,7 @@
 </style>
 <script type="text/javascript">
 	import chuiFooter from '../common/footer.vue';
-	import chuiRight from '../common/chuiright.vue'
+	import chuiRight from '../common/Right.vue';
     import { XHRPost,XHRGet } from '../../js/ajax.js';
     export default{
         data() {
@@ -131,7 +136,8 @@
             }
         },
         components: {
-        	chuiFooter
+        	chuiFooter,
+        	chuiRight
     		},
         computed: {
            
