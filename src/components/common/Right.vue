@@ -5,10 +5,9 @@
 </template>
 <style>
 	.chui_right{
-		width:64%;
-		height:700px;
-		border:1px solid #ddd;
-		margin-right:2%;
+		width:77%;
+		height:1200px;
+		
 	}		
 
 </style>

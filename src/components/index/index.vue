@@ -1,7 +1,11 @@
 <template>
-		<div class="layui-layout layui-layout-admin">
-		    <div class="layui-header">
+		<div class="layui-layout layui-layout-admin" style="box-shadow: 4px 4px 2px #ddd;">
+		    <div class="layui-header" style="background:#fff;">
 		        <div class="layui-logo">翠鸟快速建站</div>
+		         <div class="layui-body_main dis_flex">
+		        	<div class="edit" :class="{'bg-color-23262E':edit == 1}" @click="GotoEdit(1)">1.编辑</div>
+		        	<div class="preview" :class="{'bg-color-23262E':edit == 2}" @click="GotoEdit(2)">2.发布</div>
+		        </div>
 		        <!-- 头部区域（可配合layui已有的水平导航） -->
 		        <!-- <ul class="layui-nav layui-layout-left">
 		            <li class="layui-nav-item" @click="Gotolist(1)" v-bind:class='{"bg-color-red":num == 1}'>编辑</li>
@@ -10,7 +14,7 @@
 		       
 		        <ul class="layui-nav layui-layout-right">
 		            <li class="layui-nav-item">
-		                <a @click="GotoDataShow()">
+		                <a @click="GotoDataShow()" style="color:#000;">
 		                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
 		                    贤心
 		                </a>
@@ -19,9 +23,9 @@
 		                    <dd><a>安全设置</a></dd>
 		                </dl>
 		            </li>
-		            <li class="layui-nav-item"><a href="">退出</a></li>
+		            <li class="layui-nav-item"><a href="" style="color:#000;">退出</a></li>
 		        </ul>
-		         <div style="width:2rem;display:inline-block;">888</div>
+		        <!--  <div style="margin-left:210px;height:60px;line-height:60px;color:#fff;">888</div> -->
 		    </div>
 
 		    <div class="layui-side layui-bg-black">
@@ -33,7 +37,7 @@
 		                    	<a class="" href="javascript:;">{{key.brigade}}</a>
 		                    </div>
 		                    <dl class="layui-nav-child">
-		                        <dd v-for="is in test[index_].info" v-if="type == index_+1"><a href="javascript:;">{{is.content}}</a></dd>
+		                        <dd v-for="(is,it) in test[index_].info" v-if="type == index_+1" @click="GotoTagPage(test[index_].info[it].pageID)"><a>{{is.content}}</a></dd>
 		                        <!-- <dd><a href="javascript:;">列表二</a></dd> -->
 		                    </dl>
 		                </li>
@@ -44,10 +48,10 @@
 
 		    <div class="layui-body">
 		        <!-- 内容主体区域 -->
-		        <div class="layui-body_main dis_flex">
+		       <!--  <div class="layui-body_main dis_flex">
 		        	<div class="edit" :class="{'bg-color-23262E':edit == 1}" @click="GotoEdit(1)">编辑</div>
-		        	<div class="preview" :class="{'bg-color-23262E':edit == 2}" @click="GotoEdit(2)">预览</div>
-		        </div>
+		        	<div class="preview" :class="{'bg-color-23262E':edit == 2}" @click="GotoEdit(2)">发布</div>
+		        </div> -->
 		        <div class="dis_flex">
 		        	<chui-footer></chui-footer>
 		        	<chui-right></chui-right>	
@@ -81,7 +85,20 @@
 	/*单页样式*/
 	
 	.layui-nav-item>.layui-nav-child{display: block;}
-	@media(max-width:1290px) {
+		.layui-body_main{
+			width:2.4rem;
+			margin:0 auto;
+		}
+	    .edit,.preview{
+			width:1.2rem;
+			height:60px;
+			line-height:60px;
+			text-align:center;
+			font-size: 20px;
+			}
+		
+
+	/*@media(max-width:1290px) {
 		.layui-body_main{
 			width:3.5rem;
 			margin:0.15rem auto;
@@ -108,7 +125,7 @@
 			border:1px solid #ddd;
 			text-align:center;
 			}
-		}
+		}*/
 	
 </style>
 <script type="text/javascript">
@@ -119,10 +136,11 @@
         data() {
             return {
                 test:[
-                	{brigade:'电商',info:[{content:'母婴产品'},{content:'生活用品'}]},
-                	{brigade:'门店',info:[{content:'超市活动'},{content:'品牌活动'}]},
-                	{brigade:'医院',info:[{content:'医院官网'},{content:'药品作用'},{content:'医生简介'}]},
-                	{brigade:'学校',info:[{content:'学校官网'},{content:'学校招生'},{content:'学生就业'}]}
+                	{brigade:'微信',info:[{content:'摄影单页',pageID:'1'},{content:'母婴单页',pageID:'2'}]},
+                	{brigade:'电商',info:[{content:'母婴产品',pageID:'3'},{content:'生活用品',pageID:'4'}]},
+                	{brigade:'门店',info:[{content:'超市活动',pageID:'5'},{content:'品牌活动',pageID:'6'}]},
+                	{brigade:'医院',info:[{content:'医院官网',pageID:'7'},{content:'药品作用',pageID:'8'},{content:'医生简介',pageID:'12'}]},
+                	{brigade:'学校',info:[{content:'学校官网',pageID:'9'},{content:'学校招生',pageID:'10'},{content:'学生就业',pageID:'11'}]}
                 	
                 ],
                 info:{
@@ -202,6 +220,10 @@
             },
             GotoEdit:function(ret){
             	this.edit = ret;
+            },
+            GotoTagPage:function(ret){
+            	alert(ret);
+
             }
            
 

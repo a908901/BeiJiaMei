@@ -3,13 +3,19 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>贝加美后台子页面</title>
+    <title>贝加美后台主页</title>
     <link rel="stylesheet" href="../../css/lib/layer.css">
-
+    <style type="text/css">
+    	.layui-header>.layui-layout-left>.bg-color-red{
+		background: red;
+	}
+    </style>
 </head>
 <body class="layui-layout-body">
-<div class="container" id="container">
+<div class="container" id="container" v-cloak>
+ 
     <router-view></router-view>
+   
     <!--<router-view></router-view>-->
 </div>
 <script src="../../js/lib/vue.js"></script>
@@ -18,11 +24,12 @@
 <script src="../../js/lib/vue-infinite-scroll.js"></script>
 <script src="../../js/lib/jsencrypt.js"></script>
 <script src="../../js/lib/fastclick.js"></script>
+<script src="../../js/lib/rem.js"></script>
 <script src="../../js/main/main.js"></script>
+
 <script type="text/javascript">
     define = null;
     require = null;
-
 </script>
 </body>
 </html>
