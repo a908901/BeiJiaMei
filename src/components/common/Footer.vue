@@ -24,11 +24,69 @@
 	}
 	/**/
 	.footer_left{
-		width:23%;
-		height:1200px;
-		border:1px solid #ddd;	
+		width:300px;
+		height:850px;
+		border:1px solid #ddd;
+		background: #E9EFF3;
+		position: fixed;	
 	}	
 	.header_title{
+		border-left: 3px solid #30c15a;
+	    line-height:18px;
+	    padding: 1px 0 0 6px;
+	    margin:5px 0 0 5px;
+	}
+	.header_input{
+		width:88%;
+		margin:16px auto; 
+		position: relative;
+	}
+	.header_input>input{
+		width:85%;
+		height:26px;
+		padding-left:25px;
+		border:1px solid #ddd;
+		border-radius: 555px;
+		
+	}
+	.footer_left_main{
+		width:300px;
+		padding-top:3px;
+	}
+	.f_left_header{
+		width:100%;
+		height:100px;
+	}
+	/****/
+	.f_left_main{
+		width:73px;
+		height:70px;
+		border-bottom:1px solid #ddd;
+		border-right:1px solid #ddd;
+		display: inline-block;
+		background: #fff;
+	}
+	.f_left_main>div{
+		text-align: center;
+		font-size: 14px;
+	}
+	.f_left_main>img{
+		width:40%;
+		height:30px;
+		background-size:100% 100%;
+		margin:6px 30%;
+	}
+	.f_left_main:hover{
+		border:1px solid #02B2FC;
+	}
+
+
+
+
+
+
+
+	/*.header_title{
 		border-left: 0.025rem solid #30c15a;
 	    line-height:0.12rem;
 	    padding: 0.01rem 0 0 0.05rem;
@@ -57,16 +115,18 @@
 		border-bottom: 1px solid #ddd;
 	}
 	.f_left_main{
-		width:25%;
+		width:24.6%;
 		height:0.45rem;
+		border-bottom:1px solid #ddd;
+		border-right:1% solid #ddd;
 		display: inline-block;
-	}
+	}*/
 	/*.f_left_main:hover{
 		background: #ddd;
 		color:#fff;
 	}*/
 	
-	.f_left_main>div{
+	/*.f_left_main>div{
 		text-align: center;
 		font-size: 0.1rem;
 	}
@@ -76,10 +136,8 @@
 		background-size:100% 100%;
 		margin:0.06rem 30%;
 		color:red;
-	}
-	b{
-
-	}	
+	}*/
+	
 
 </style>
 <script>
@@ -91,14 +149,15 @@
 	                	{pic:'../../icon/CN_roast.png',name:"轮播图"},
 		                {pic:'../../icon/CN_title.png',name:"字体"},
 		                {pic:'../../icon/CN_header.png',name:"头像"},
-		                {pic:'../../icon/CN_gift.png',name:"礼物"}
+		                {pic:'../../icon/CN_gift.png',name:"礼物"},
+		                {pic:'../../icon/CN_button.png',name:"底部按钮"}
 	                	],
 	                info:{
 	                	type:"0"
 	                }
             }
         },
-        components: {
+         components: {
         	
     		},
         computed: {

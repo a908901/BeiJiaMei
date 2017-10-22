@@ -1,6 +1,6 @@
 <template>
-		<div class="layui-layout layui-layout-admin" style="box-shadow: 4px 4px 2px #ddd;">
-		    <div class="layui-header" style="background:#fff;">
+		<div class="layui-layout layui-layout-admin">
+		    <div class="layui-header" style="background:#fff;box-shadow: 0 1px 4px 0 rgba(51,69,54,.15);">
 		        <div class="layui-logo">翠鸟快速建站</div>
 		         <div class="layui-body_main dis_flex">
 		        	<div class="edit" :class="{'bg-color-23262E':edit == 1}" @click="GotoEdit(1)">1.编辑</div>
@@ -46,7 +46,7 @@
 		        </div>
 		    </div>
 
-		    <div class="layui-body">
+		    <div class="layui-body" style="bottom:0;">
 		        <!-- 内容主体区域 -->
 		       <!--  <div class="layui-body_main dis_flex">
 		        	<div class="edit" :class="{'bg-color-23262E':edit == 1}" @click="GotoEdit(1)">编辑</div>
@@ -54,6 +54,7 @@
 		        </div> -->
 		        <div class="dis_flex">
 		        	<chui-footer></chui-footer>
+		        	<chui-center></chui-center>
 		        	<chui-right></chui-right>	
 		        </div>
 		        
@@ -128,8 +129,10 @@
 		}*/
 	
 </style>
+
 <script type="text/javascript">
 	import chuiFooter from '../common/footer.vue';
+	import chuiCenter from '../common/Center.vue';
 	import chuiRight from '../common/Right.vue';
     import { XHRPost,XHRGet } from '../../js/ajax.js';
     export default{
@@ -155,12 +158,20 @@
         },
         components: {
         	chuiFooter,
+        	chuiCenter,
         	chuiRight
     		},
         computed: {
            
         },
+        mounted:function(){
+				//this.Gototest();
+				},
         methods: {
+        	Gototest:function(){
+        		var width = document.documentElement.clientWidth; 
+				alert(width);
+        	},
             //错误提示方法
             errorTip: function (msg) {
                 layer.open({
