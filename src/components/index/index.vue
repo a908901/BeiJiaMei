@@ -23,7 +23,7 @@
 		                    <dd><a>安全设置</a></dd>
 		                </dl>
 		            </li>
-		            <li class="layui-nav-item"><a href="" style="color:#000;">退出</a></li>
+		            <li class="layui-nav-item" ><a style="color:#000;">退出</a></li>
 		        </ul>
 		        <!--  <div style="margin-left:210px;height:60px;line-height:60px;color:#fff;">888</div> -->
 		    </div>
@@ -153,7 +153,8 @@
                 edit:'1',
                 type:'',
                 arr:[],
-                num:''
+                num:'',
+                msg:'5621'
             }
         },
         components: {
@@ -236,6 +237,7 @@
             	alert(ret);
 
             }
+           
            
 
         }

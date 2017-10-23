@@ -1,8 +1,8 @@
 <template>
 	<div class="chui_right" :style="{width:num+'px'}">
-		<div>预览页</div>
+		<!-- <div>预览页</div> -->
 		<div class="right_main">
-			<chui-shuff></chui-shuff>
+			<chui-shuff v-if="true"></chui-shuff>
 		</div>
 	</div>
 </template>
@@ -13,27 +13,13 @@
 		background: #fff;
 		margin-left:300px;
 			}
-	/*.right_main{
-		width:100%;
-		height:1rem;
-		background: red;
-	}
-	*/
-/*	@media screen and (min-width: 1523px) {
-		.chui_right{
-			position: absolute;
-			width:5rem;
-			height:850px;
-			background: #fff;
-			background: red;
-			margin-left:300px;
-				}
-	}*/
+
 </style>
 <script type="text/javascript">
 	import chuiShuff from '../weixin/ActivityPage/Shuff.vue';
     import { XHRPost,XHRGet } from '../../js/ajax.js';
-    var width = document.documentElement.clientWidth; 
+    //var width = document.documentElement.clientWidth;
+   var Hup = new Vue();
     export default{
         data() {
             return {
@@ -48,6 +34,13 @@
         computed: {
          
         },
+      	created() {
+           Hup.$on('change', function(val) {
+                console.log(val); //hello
+                console.log(0);
+            })
+           	 console.log(Hup.$on('change'));
+        },
         mounted () {
          	this.GotoWidth();
 	        const that = this
@@ -57,6 +50,7 @@
 	                that.screenWidth = window.screenWidth
 	            })()
 	        		}
+	      
    		 },
    		watch: {
 	          screenWidth (val) {
@@ -77,3 +71,4 @@
 
         }
     }
+   </script>
