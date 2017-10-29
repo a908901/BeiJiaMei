@@ -2,7 +2,7 @@
 	<div class="footer_left">
 		<div class="footer_left_main">
 			<div class="f_left_header">
-				<div class="header_title" @click="fn()">模块列表</div> 
+				<div class="header_title">模块列表</div> 
 				<div class="header_input">
 					<input type="" placeholder="搜索模块名称">
 					<img src="../../icon/CN_galss.png" style="width:20px;height:20px;background-size:100% 100%;position:absolute;top:4px;left:5px;">
@@ -26,7 +26,7 @@
 	.footer_left{
 		width:300px;
 		height:850px;
-		border:1px solid #ddd;
+		/*border:1px solid #ddd;*/
 		background: #E9EFF3;
 		position: fixed;	
 	}	
@@ -83,7 +83,8 @@
 </style>
 <script>
 	import { XHRPost,XHRGet } from '../../js/ajax.js';
-	var Hub = new Vue();
+	import { Hub } from '../../js/other.js';
+	//var Hub = new Vue();
     export default{
         data() {
             return {
@@ -92,17 +93,15 @@
 		                {pic:'../../icon/CN_title.png',name:"字体"},
 		                {pic:'../../icon/CN_header.png',name:"头像"},
 		                {pic:'../../icon/CN_gift.png',name:"礼物"},
-		                {pic:'../../icon/CN_button.png',name:"底部按钮"}
+		                {pic:'../../icon/CN_gift.png',name:"底部按钮"}
 	                	],
 	                info:{
 	                	type:"0"
-	                },
-	                msg:'9856'
+	                }    
             }
         },
          mounted () {
          	//this.fn();
-	      
    		 },
          components: {
         	
@@ -112,14 +111,44 @@
         },
         methods: {
         	GotoSelect:function(ret){
-        		alert(ret);
-        	},
-    	  fn:function() {
-                // 2) 主动触发监听(中转站触发监听)
-                console.log(this.msg); //hello
-                Hub.$emit('change', this.msg); //$emit触发监听方法
-            }
+        		//alert(ret);
+        		Hub.$emit('change',ret);
+        	}
+    	  	// fn:function() {
+                // console.log(this.msg); 
+                // Hub.$emit('change', this.msg);
+             //}
            
         }
     }
+
+
+
+
+/**
+ *                    _ooOoo_
+ *                   o8888888o
+ *                   88" . "88
+ *                   (| -_- |)
+ *                    O\ = /O
+ *                ____/`---'\____
+ *              .   ' \\| |// `.
+ *               / \\||| : |||// \
+ *             / _||||| -:- |||||- \
+ *               | | \\\ - /// | |
+ *             | \_| ''\---/'' | |
+ *              \ .-\__ `-` ___/-. /
+ *           ___`. .' /--.--\ `. . __
+ *        ."" '< `.___\_<|>_/___.' >'"".
+ *       | | : `- \`.;`\ _ /`;.`/ - ` : | |
+ *         \ \ `-. \_ __\ /__ _/ .-` / /
+ * ======`-.____`-.___\_____/___.-`____.-'======
+ *                    `=---='
+ *
+ * .............................................
+ *          佛祖保佑             永无BUG
+ **/
 </script>
+
+
+
