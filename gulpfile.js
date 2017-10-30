@@ -44,7 +44,7 @@ let luYuQiu = {
 };
 
 
-let targetRoute = qinHaiLang;
+let targetRoute = luYuQiu;
 
 
 // 下面就是dirty work, get your hands dirty!
@@ -55,7 +55,7 @@ var webpackConfig = {
 			components: '../../components', // 组件别名,js里引用路径可直接 'components/xxx/yyy'
             // 'vux-components': 'vux/src/components/'
 		},
-		extensions: ['', '.js', '.vue', '.scss', '.css']
+		extensions: ['', '.js', 'jsx','.vue', '.scss', '.css']
 	},
 	output: {
 		// publicPath: 'yourcdnlink/static/',
@@ -170,7 +170,7 @@ gulp.task('reload', function () {
 			notify: false
 		});
 		dev();// watch
-		
+		console.log("发生变化");
 	});
 	
 });
@@ -187,6 +187,7 @@ function dev() {
 	});
 	watch([src.images]).on('change', function() {
 		runSequence('images', function () {
+			console.log("发生变化");
 			bsReload()
 		});
 	});
@@ -213,9 +214,11 @@ function dev() {
 		if (business[0] === 'common') {
 			path = ['./src/js/**/*.js','!./src/js/lib/*.js'];
 		} else if (business[0] === jsFile) {
-			path = './src/js/'+ business[0] +'/*.js';
+			// path = './src/js/'+ business[0] +'/*.js';
+			path = ['./src/js/**/*.js','!./src/js/lib/*.js'];
 		} else {
-			path = './src/js/' + business[0] + '/' + jsFile + '.js';
+			// path = './src/js/' + business[0] + '/' + jsFile + '.js';
+			path = ['./src/js/**/*.js','!./src/js/lib/*.js'];
 		}
 		compileJS(path);
 	})
