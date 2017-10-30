@@ -1,7 +1,6 @@
 <template>
 	<div>
-        <div class="headlist_all" id="headlist_all" v-on:mouseenter="dataDetails()" v-on:mouseleave="hiddenDetail()">
-            <div class="del" v-if="info.delShow" @click="GotoSelect()">X</div>
+        <div class="headlist_all" id="headlist_all">
             <div class="headlist_main">
                 <div class="headlist_main_pic"></div>
             </div> 
@@ -118,7 +117,6 @@
         margin:0 auto;
         margin-top:40px;
         border-radius:5px 5px 0 0;
-        position: relative;;
     }
     .headlist_main{
         width:100%;
@@ -214,41 +212,51 @@
     }
 </style>
 <script type="text/javascript">
-   
     import { Hub } from '../../../js/other.js';
     export default{
         data() {
             return {
                 num:'',
-                screenWidth:2,          
-                info:{
-                  delShow:false
-                },
+                screeWidth:document.body.clientWidth,
+                divWidth: ''        
             }
         },
        
         computed: {
         
         },
-        created() {
-            
-            
+        created() {  
            
         },
-        mounted () { 
+        mounted () {
+            alert(this.screeWidth);
+           this.GotoWidth();
+            const that = this
+            window.onresize = () => {
+                return (() => {
+                    window.screeWidth = document.body.clientWidth
+                    that.screeWidth = window.screeWidth
+                })()
+                    }
           
          },
-        methods: {
+         watch: {
+            // divWidth (val) {
+            //     console.log(val+'^^^^^^^^^^^^^^^^^^^^^^^^^^');
+            //         },
+            screeWidth (val) {
+                  //this.GotoWidth();
+                  console.log(5);
+                    }
 
-            dataDetails:function(){
-                this.info.delShow = true;
-                },
-            hiddenDetail:function(){
-                this.info.delShow = false;
-                },
-             GotoSelect:function(){
-                Hub.$emit('headlist',false);
-          },
+            },
+        methods: {
+           GotoWidth:function(){
+                var v = document.getElementById('headlist_all');
+                //alert((v.offsetWidth-2)/8);
+                this.divWidth = (v.offsetWidth-2)/8;
+
+            }
 
         }
     }

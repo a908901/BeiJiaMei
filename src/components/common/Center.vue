@@ -4,7 +4,7 @@
 			<div class="right_main">
 				<div class="need_main">
 					<chui-shuff v-if="info.listShow"></chui-shuff>
-					<head-list></head-list>
+					<head-list v-if="info.headListShow"></head-list>
 				</div>
 				<!-- <chui-shuff v-if="info.listShowOne"></chui-shuff>-->
 				<div @click="GotoPreservation()" class="Preservation">保存</div>
@@ -62,8 +62,10 @@
                	screenWidth:document.body.clientWidth,
                	info:{
                		listShow:false,
-               		listShowOne:false
-               	}         
+               		//listShowOne:false
+               		headListShow:false
+               	}
+               
             }
         },
         components: {
@@ -71,8 +73,9 @@
     		headList
     		},
         computed: {
-         
+         	
         },
+       
       	created() {
            // const _this = this;
            //  Hub.$on('change', function(val) {
@@ -96,8 +99,9 @@
             const _this = this;
             Hub.$on('change', function(val) {
             	 if(val == "轮播图"){
-	                _this.info.listShow = true;
-	                console.log(_this.info.listShow);
+	                	_this.info.listShow = true;
+            		}else if(val == "礼物"){
+            			_this.info.headListShow = true;	
             		}else{
             			console.log('开发者');
             		}
@@ -105,7 +109,11 @@
             Hub.$on('changeOne', function(val) {
             		_this.info.listShow = val;
             }) 
-            	
+            Hub.$on('headlist', function(val) {
+            		_this.info.headListShow = val;
+            		//alert(val);
+            }) 
+            
         },
         mounted () {
          	this.GotoWidth();
